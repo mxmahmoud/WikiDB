@@ -6,8 +6,6 @@ from app.routes import router
 from app.database_config import engine
 import app.models as models
 
-
-
 load_dotenv()
 
 models.Base.metadata.create_all(bind=engine)
