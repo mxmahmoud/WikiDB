@@ -20,7 +20,7 @@ def get_db():
 
 @router.get('/favicon.ico', include_in_schema=False)
 async def favicon():
-    return FileResponse((Path(__file__).parent / "data" / "favicon.ico"))
+    return FileResponse((Path(__file__).parent.parent / "data" / "favicon.ico"))
 
 @router.get("/")
 async def root():

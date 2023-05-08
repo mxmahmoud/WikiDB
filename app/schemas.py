@@ -1,8 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
 
-# For validation purposes on the receiving end
-# not necessary since we are just receiving a plain text, which contains the xml 
 class PageSchema(BaseModel):
     id: int
     title: str
