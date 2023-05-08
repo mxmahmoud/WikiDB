@@ -31,7 +31,6 @@ def extract_wiki_dumpfile(archive_path: str = None, ingest_all: bool = False):
             if not ingest_all and nr > nr_last_entry:
                 break
 
-
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description='A set of tools...')
@@ -42,7 +41,7 @@ if __name__ == "__main__":
     parser.add_argument('-a', '--archive', dest='archive', required=False,
                         help='Path to the archive file', default = None)
     parser.add_argument('-all', dest='all', required=False, type=bool,
-                        help='Load complete archive to database', default = True)
+                        help='Load complete archive to database', default = False)
 
     # parse the arguments
     args = parser.parse_args()
