@@ -39,7 +39,7 @@ async def ingest_page(db: Session, page: PageSchema):
     return _page
 
 # Function to search for content in the database using a search mask
-async def search_content(db: Session, search_mask: SearchMask) -> List[SearchResult]:
+async def search_content(db: Session, search_mask: SearchMask, limit: int = 20) -> List[SearchResult]:
     # Without indexing
     #results = db.query(Page).filter(or_(Page.title.ilike(f"%{search_mask.content}%"), 
     #                                    Page.content.ilike(f"%{search_mask.content}%"))).all()
@@ -50,7 +50,7 @@ async def search_content(db: Session, search_mask: SearchMask) -> List[SearchRes
             func.plainto_tsquery('english', search_mask.content)
         )
     )
-    results = engine.execute(search_query).fetchall()
+    results = engine.execute(search_query).fetchmany(limit)
 
     return results
 
