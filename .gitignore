@@ -1,0 +1,15 @@
+pycache/
+__pycache__
+.vscode/
+.dockerignore
+.env
+
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.swp
+*.bak
+*.bz2
+
+docker-compose.override.yml

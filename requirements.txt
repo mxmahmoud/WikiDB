@@ -1,0 +1,7 @@
+fastapi==0.95.1
+uvicorn[standard]
+sqlalchemy
+psycopg2
+pydantic
+psycopg2
+python-dotenv
