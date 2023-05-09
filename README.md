@@ -57,5 +57,6 @@ python helper.py -e # for extracting the archive and feeding it to the server
 - Elastic search
 - Indexing based on different languages
 - Ingest only if page does not exist
-- Update Pages
+- Update / delete pages
+- Make database via .env config cleaner / more generic 
 
