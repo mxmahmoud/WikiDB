@@ -5,9 +5,9 @@ import os
 
 # If database credentials are set as environment variables, use them
 # otherwise, prompt the user to enter the database credentials
-if "WIKI_DB_USERNAME" in os.environ and "WIKI_DB_PW" in os.environ:
-    username = os.environ["WIKI_DB_USERNAME"]
-    pw = os.environ["WIKI_DB_PW"]
+if "DB_USER" in os.environ and "DB_PASSWORD" in os.environ:
+    username = os.environ["DB_USER"]
+    pw = os.environ["DB_PASSWORD"]
 else:
     print("Create an .env file to avoid inserting credentials")
     username = input("username: ")
@@ -17,6 +17,9 @@ else:
 # otherwise, construct the database URL using the entered credentials
 if "DATABASE_URL" in os.environ:
     DATABASE_URL = os.environ["DATABASE_URL"].replace("username", username).replace("password", pw)
+    print("TEEEEEEEEEESSSSSSSSSSSST")
+    print("TEEEEEEEEEESSSSSSSSSSSST")
+    print(DATABASE_URL)
 else:
     DATABASE_URL = f'postgresql://{username}:{pw}@localhost:5432/craftworks_wiki_db'
 
