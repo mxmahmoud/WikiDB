@@ -17,9 +17,6 @@ else:
 # otherwise, construct the database URL using the entered credentials
 if "DATABASE_URL" in os.environ:
     DATABASE_URL = os.environ["DATABASE_URL"].replace("username", username).replace("password", pw)
-    print("TEEEEEEEEEESSSSSSSSSSSST")
-    print("TEEEEEEEEEESSSSSSSSSSSST")
-    print(DATABASE_URL)
 else:
     DATABASE_URL = f'postgresql://{username}:{pw}@localhost:5432/craftworks_wiki_db'
 
