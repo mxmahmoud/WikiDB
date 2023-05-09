@@ -8,7 +8,8 @@ This application ingests Wikipedia XML dumps and provides a search interface for
 - [Setup](#setup)
 - [API Endpoints](#api-endpoints)
 - [Usage](#usage)
-- [Contributing](#contributing)
+- [Future Work](#future-work)
+- [Questions](#questions)
 
 ## Prerequisites
 
@@ -48,8 +49,25 @@ docker-compose up --build
 ```bash
 python helper.py -e # for extracting the archive and feeding it to the server
 ```
+or execute following curl command:
+``` bash
+curl -X POST -H "Content-Type: text/plain" -d "<page xmlns='http://www.mediawiki.org/xml/export-0.10/' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>\n  <title>Title of the Content</title>\n  <ns>0</ns>\n  <id>12</id>\n  <revision>\n    <text bytes='109628' xml:space='preserve'>\nWikipedie Content\n</text>\n  </revision>\n</page>" "http://127.0.0.1:8000/api/v0.1/ingest"
+```
+replace the content in after argument `-d` according to your xml page which you would like to ingest
+
 3. Use the API endpoints to search for specific pages and retrieve an overview of all ingested pages.
 
+For searching use either the following command:
+
+``` bash
+curl -X POST -H "Content-Type: application/json" -d "{\"content\":\"search term\"}" "http://127.0.0.1:8000/api/v0.1/search"
+```
+
+or call the following URL in your browser
+
+``` bash
+http://127.0.0.1:8000/api/v0.1/search?content=search%20term
+``` 
 
 ## Future Work
 
@@ -60,3 +78,25 @@ python helper.py -e # for extracting the archive and feeding it to the server
 - Update / delete pages
 - Make database via .env config cleaner / more generic 
 
+# Questions
+
+What is the bottleneck of the current design?
+- The ingestion is single threaded and feeds page by page
+- ~~ Search is performed two times along the content & title ~~
+- Gin indexing is not the most performant approach for full text search 
+- No recording of similar searches
+- XML parsing is slow
+- Synchronous database operations
+- fetching DB object with every call is inefficient
+
+How could the ingestion performance be improved?
+- Multiprocess the ingestion procedure
+- Bulk inserting
+- Using more efficient XML parser
+- Security, Logging & Error Handling
+- Limiting API calls
+
+How could the search performance be improved?
+- Index with Gin or Elasticsearch (implemented gin)
+- Caching: Recording similar searched content and the corresponding results
+- Limiting API calls
