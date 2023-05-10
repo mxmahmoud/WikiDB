@@ -82,7 +82,7 @@ http://127.0.0.1:8000/api/v0.1/search?content=search%20term
 
 What is the bottleneck of the current design?
 - The ingestion is single threaded and feeds page by page
-- ~~ Search is performed two times along the content & title ~~
+- ~~Search is performed two times along the content & title ~~
 - Gin indexing is not the most performant approach for full text search 
 - No recording of similar searches
 - XML parsing is slow
